@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #274494;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+/* 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+} */ 
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-start-rgb))
+      )
+      rgb(var(--background-end-rgb))
+}
+
+
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+} 
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fade-in {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.btn-primary {
+  @apply bg-pink-600 hover:bg-pink-800 text-white py-2 px-4 rounded transition-all;
+}
+
+.btn-danger {
+  @apply bg-red-500 hover:bg-red-600 text-white py-2 px-4 transition-all;
+}
+
+.btn-disabled {
+  @apply bg-gray-600 text-white py-2 px-4 rounded transition-all;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded transition-all;
+}
+
+
+/* Todo esto hacia abajo es ewxperimental, esta sujeto a cambios */
+
+.book {
+  position: relative;
+  width: 400px;
+  height: 550px;
+  /* background-color: whitesmoke; */
+  -webkit-box-shadow: 1px 1px 12px #000;
+  box-shadow: 1px 1px 12px #000;
+  -webkit-transform: preserve-3d;
+  -ms-transform: preserve-3d;
+  transform: preserve-3d;
+  -webkit-perspective: 2000px;
+  perspective: 2000px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  /* color: #000; */
+}
+
+.fade {
+  top: 0;
+  position: absolute;
+  background-color: lightgray;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-transform-origin: 0;
+  -ms-transform-origin: 0;
+  transform-origin: 0;
+  -webkit-box-shadow: 1px 1px 12px #000;
+  box-shadow: 1px 1px 12px #000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.book:hover .fade {
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -webkit-transform: rotatey(-80deg);
+  -ms-transform: rotatey(-80deg);
+  transform: rotatey(-80deg);
+}
+
+/* Image {
+  width: 400px;
+  height: 300px;
+  border-radius: 10px;
+} */
