@@ -1,6 +1,5 @@
 'use client'
 
-import { title_font } from "@/config/fonts";
 import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
 import Link from "next/link";
 import { useCartStore, useUiStore } from "@/store";
@@ -35,11 +34,11 @@ export const TopMenu = () => {
       <div>
         <Link href="/">
           <Image
-            src="/imgs/queleo3.jpg"
+            src="/imgs/queleo2.jpg"
             alt="Que leo Shop"
-            width={150} 
+            width={100} 
             height={50} 
-            className="cursor-pointer mt-4 mb-4"
+            className="cursor-pointer mt-4 mb-4 sm:mx-2"
             priority
           />
         </Link>
@@ -52,19 +51,25 @@ export const TopMenu = () => {
           className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
           href="/gender/men"
         >
-          Hombres
+          Novelas
         </Link>
         <Link
           className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
           href="/gender/women"
         >
-          Mujeres
+          Literarios
         </Link>
         <Link
           className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
           href="/gender/kid"
         >
-          Ninos
+          Juvenil
+        </Link>
+        <Link
+          className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
+          href="/gender/kid"
+        >
+          Que leo
         </Link>
       </div>
 
