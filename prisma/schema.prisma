@@ -19,14 +19,13 @@ model Product {
   description  String
   inStock      Int
   price        Float          @default(0)
-  sizes        Size[]         @default([])
   slug         String         @unique
   tags         String[]       @default([])
   gender       Gender
   categoryId   String
+  OrderItem    OrderItem[]
   category     Category       @relation(fields: [categoryId], references: [id])
   ProductImage ProductImage[]
-  OrderItem    OrderItem[]
 
   @@index([gender])
 }
@@ -39,48 +38,22 @@ model ProductImage {
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String       @id @default(uuid())
   name          String
-  email         String    @unique
   emailVerified DateTime?
   password      String
-  role          Role      @default(user)
+  role          Role         @default(user)
   image         String?
-
-  address UserAddress?
-
-  // Relaciones, esto solo crea la relacion de 1 * pero no genera un nuevo campo
-  Order Order[]
-}
-
-enum Size {
-  XS
-  S
-  M
-  L
-  XL
-  XXL
-  XXXL
-}
-
-enum Gender {
-  men
-  women
-  kid
-  unisex
-}
-
-enum Role {
-  admin
-  // seller
-  user
+  email         String       @unique
+  Order         Order[]
+  address       UserAddress?
 }
 
 model Country {
-  id   String @id
+  id           String         @id
   name         String
-  UserAddress  UserAddress[]
   OrderAddress OrderAddress[]
+  UserAddress  UserAddress[]
 }
 
 model UserAddress {
@@ -91,58 +64,41 @@ model UserAddress {
   address2   String?
   postalCode String?
   city       String
-  // country String
   phone      String
   region     String?
   comuna     String?
-
-  // relaciones
-  country   Country @relation(fields: [countryId], references: [id])
-  countryId String
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String @unique
+  countryId  String
+  userId     String  @unique
+  country    Country @relation(fields: [countryId], references: [id])
+  user       User    @relation(fields: [userId], references: [id])
 }
 
-// orden de compras
-
 model Order {
-  id           String    @id @default(uuid())
-  subTotal     Float
-  tax          Float
-  total        Float
-  itemsInOrder Int
-  isPaid       Boolean   @default(false)
-  paidAt       DateTime?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relaciones
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-
-  OrderItem    OrderItem[]
-  OrderAddress OrderAddress?
-
-  //Identificador obligatorio por tiendas, es decir terceros de pago, redcompra,klap, paypal etc
+  id            String        @id @default(uuid())
+  subTotal      Float
+  tax           Float
+  total         Float
+  itemsInOrder  Int
+  isPaid        Boolean       @default(false)
+  paidAt        DateTime?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  userId        String
+  despacho      Boolean?      @default(false)
   transactionId String?
-
-  //Implementacion para revisar si el despacho esta echo o no
-  despacho Boolean? @default(false)
+  user          User          @relation(fields: [userId], references: [id])
+  OrderAddress  OrderAddress?
+  OrderItem     OrderItem[]
 }
 
 model OrderItem {
-  id       String @id @default(uuid())
-  quantity Int
-  price    Float
-  size     Size
-  // Relaciones
-  order    Order  @relation(fields: [orderId], references: [id])
-  orderId  String
-
-  product   Product @relation(fields: [productId], references: [id])
+  id        String  @id @default(uuid())
+  quantity  Int
+  price     Float
+  orderId   String
   productId String
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model OrderAddress {
@@ -156,11 +112,20 @@ model OrderAddress {
   phone      String
   region     String?
   comuna     String?
+  countryId  String
+  orderId    String  @unique
+  country    Country @relation(fields: [countryId], references: [id])
+  Order      Order   @relation(fields: [orderId], references: [id])
+}
 
-  // Relaciones
-  country   Country @relation(fields: [countryId], references: [id])
-  countryId String
+enum Gender {
+  men
+  women
+  kid
+  unisex
+}
 
-  Order   Order  @relation(fields: [orderId], references: [id])
-  orderId String @unique
+enum Role {
+  admin
+  user
 }

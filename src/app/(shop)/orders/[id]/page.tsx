@@ -6,10 +6,6 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 
-
-
-
-
 interface Props {
     params: {
         id: string;
@@ -52,7 +48,8 @@ export default async function OrdersByIdPage({ params }: Props) {
                         {
                             order!.OrderItem.map(item => (
 
-                                <div key={item.product.slug + ' - ' + item.size} className="flex mt-5">
+                                <div key={item.product.slug } className="flex mt-5">
+                                {/* <div key={item.product.slug + ' - ' + item.size} className="flex mt-5"> */}
                                     <Image
                                         src={`/products/${item.product.ProductImage[0].url}`}
                                         width={150}
@@ -86,9 +83,9 @@ export default async function OrdersByIdPage({ params }: Props) {
                             <p>{address!.address}</p>
                             <p>{address!.address2}</p>
                             <p>{address!.postalCode}</p>
-                            <p>
+                            {/* <p>
                                 {address!.city}, {address!.countryId}
-                            </p>
+                            </p> */}
                             <p>{address!.region} - {address!.comuna}</p>
                             <p>{address!.phone}</p>
                         </div>

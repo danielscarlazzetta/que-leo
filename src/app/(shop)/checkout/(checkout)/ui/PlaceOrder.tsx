@@ -4,12 +4,16 @@ import { placeOrder } from "@/actions";
 import { useAddressStore, useCartStore } from "@/store";
 import { currencyFormat } from "@/utils";
 import clsx from "clsx";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
-export const PlaceOrder = () => {
 
+export const PlaceOrder = () => {
+    
+    //test
+    const { data: session } = useSession();
 
     const [loaded, setLoaded] = useState(false);
     const [errorMessage, seterrorMessage] = useState('');
@@ -32,30 +36,65 @@ export const PlaceOrder = () => {
     }, []);
 
     const onPlaceOrder = async () => {
+
         setIsPlacingOrder(true);
-
         // console.log({address})
-
         // Recordar que esto se extrae de cart, de los datos que ya se tienen almacenados
+
+        // test
+        // const userId = session?.user?.id;
+        // if (!userId) {
+        //     setIsPlacingOrder(false);
+        //     seterrorMessage("Usuario no autenticado");
+        //     return;
+        // }
+        if (!session?.user?.id) {
+            setIsPlacingOrder(false);
+            seterrorMessage("Usuario no autenticado");
+            return;
+        }
+
+
+        //test
+        const userId = session.user.id;
         const productsToOrder = cart.map(product => ({
             productId: product.id,
             quantity: product.quantity,
-            size: product.size,
+        }));
+        try {
+            const resp = await placeOrder(productsToOrder, address, userId);
+            if (!resp.ok) {
+                setIsPlacingOrder(false);
+                seterrorMessage(resp.message);
+                return;
+            }
+    
+            // Si todo sale bien
+            clearCart();
+            router.replace('/orders/' + resp.order!.id);
+        } catch (error) {
+            setIsPlacingOrder(false);
+            seterrorMessage("Error al procesar la orden");
+            console.error(error);
+        }
+
+
+/*
+        const productsToOrder = cart.map(product => ({
+            productId: product.id,
+            quantity: product.quantity,
+            // size: product.size,
         }))
-
         // console.log({address, productsToOrder});
-
-        const resp = await placeOrder(productsToOrder, address)
+        const resp = await placeOrder(productsToOrder, address , userId )
         if (!resp.ok) {
             setIsPlacingOrder(false);
             seterrorMessage(resp.message)
             return;
         }
-
         //Si todo sale bien
         clearCart();
-        router.replace('/orders/' + resp.order!.id);
-
+        router.replace('/orders/' + resp.order!.id);*/
     }
 
 
@@ -75,9 +114,9 @@ export const PlaceOrder = () => {
                 <p>{address.address}</p>
                 <p>{address.address2}</p>
                 <p>{address.postalCode}</p>
-                <p>
+                {/* <p>
                     {address.city}, {address.country}
-                </p>
+                </p> */}
                 <p>{address.region} - {address.comuna}</p>
                 <p>{address.phone}</p>
             </div>

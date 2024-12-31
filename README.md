@@ -7,7 +7,7 @@
 3. instalar dependencias ``` npm install / npm i```
 4. Levantar base de datos ```Docker compose up -d```
 5. Intalacion de prisma
-6. conectar el gestyor de base de datos al docker(Dbeaver / TablePlus)
+6. conectar el gestor de base de datos al docker(Dbeaver / TablePlus)
 7. Crear el pull( el pull es basicamente tomar la base de datos y crear el shchema.prisma, y asi poder editar este) ``` npx prisma db pull ```
 8. luego de crear o modificar el schema.prisma vamos a ejecutar el comando para actualizarlo en la base de datos ``` npx prisma migrate dev --name ProductCategoery``` esto permite crear la base de datos, o sobreescribirla
 9.  correr proyecto ``` npm run dev ```

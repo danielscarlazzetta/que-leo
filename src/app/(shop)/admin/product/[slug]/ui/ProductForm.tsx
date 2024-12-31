@@ -14,7 +14,7 @@ interface Props {
     categories: CategoryProduct[]
 }
 
-const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
+// const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
 
 interface FormInputs {
@@ -23,7 +23,7 @@ interface FormInputs {
     description: string;
     price: number;
     inStock: number;
-    sizes: string[];
+    // sizes: string[];
     tags: string;
     gender: "men" | "women" | "kid" | "unisex";
     categoryId: string;
@@ -49,21 +49,21 @@ export const ProductForm = ({ product, categories }: Props) => {
         defaultValues: {
             ...product,
             tags: product.tags?.join(", "),
-            sizes: product.sizes ?? [],
+            // sizes: product.sizes ?? [],
 
             images: undefined,
 
         }
     });
 
-    watch('sizes');
+    // watch('sizes');
 
 
-    const onSizeChanged = (size: string) => {
-        const sizes = new Set(getValues('sizes'));
-        sizes.has(size) ? sizes.delete(size) : sizes.add(size);
-        setValue('sizes', Array.from(sizes))
-    }
+    // const onSizeChanged = (size: string) => {
+    //     const sizes = new Set(getValues('sizes'));
+    //     sizes.has(size) ? sizes.delete(size) : sizes.add(size);
+    //     setValue('sizes', Array.from(sizes))
+    // }
 
     const onSubmit = async (data: FormInputs) => {
         // console.log({ data })
@@ -79,7 +79,7 @@ export const ProductForm = ({ product, categories }: Props) => {
         formData.append('description', productToSave.description);
         formData.append('price', productToSave.price.toString());
         formData.append('inStock', productToSave.inStock.toString());
-        formData.append('sizes', productToSave.sizes.toString());
+        // formData.append('sizes', productToSave.sizes.toString());
         formData.append('tags', productToSave.tags);
         formData.append('categoryId', productToSave.categoryId);
         formData.append('gender', productToSave.gender);
@@ -189,7 +189,7 @@ export const ProductForm = ({ product, categories }: Props) => {
                 <div className="flex flex-col">
 
                     <span className="font-bold text-pink-900 mt-4">Tallas</span>
-                    <div className="flex flex-wrap">
+                    {/* <div className="flex flex-wrap">
 
                         {
                             sizes.map(size => (
@@ -210,7 +210,7 @@ export const ProductForm = ({ product, categories }: Props) => {
                             ))
                         }
 
-                    </div>
+                    </div> */}
 
 
                     <div className="flex flex-col mb-2">

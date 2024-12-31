@@ -47,7 +47,7 @@ async function main() {
     //     }
     // })
 
-    const categoriesData = categories.map( name => ({ name}));
+    const categoriesData = categories.map( name => ({ name }));
 
     await prisma.category.createMany({
         data: categoriesData,

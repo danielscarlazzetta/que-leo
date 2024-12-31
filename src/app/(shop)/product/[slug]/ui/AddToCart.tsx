@@ -1,7 +1,9 @@
 'use client'
 
-import { QuantitySelector, SizeSelector } from "@/components"
-import type { CartProduct, Product, Size } from "@/interface";
+import { QuantitySelector } from "@/components";
+// import { QuantitySelector, SizeSelector } from "@/components";
+import type { CartProduct, Product } from "@/interface";
+// import type { CartProduct, Product, Size } from "@/interface";
 import { useCartStore } from "@/store";
 import { useState } from "react";
 import { IoCartOutline } from "react-icons/io5"
@@ -17,15 +19,16 @@ export const AddToCart = ({ product }: Props) => {
 
     const addProductToCart = useCartStore( state => state.addProductToCart)
 
-    const [size, setSize] = useState<Size | undefined>();
+    // const [size, setSize] = useState<Size | undefined>();
     const [quantity, setQuantity] = useState<number>(1);
     const [posted, setPosted] = useState(false);
 
 
     const addToCart = () => {
         setPosted(true);
-        if (!size) return;
-        console.log({ size, quantity, product })
+        // if (!size) return;
+        console.log({ quantity, product })
+        // console.log({ size, quantity, product })
 
         const cartProduct: CartProduct = {
             id: product.id,
@@ -33,14 +36,14 @@ export const AddToCart = ({ product }: Props) => {
             title: product.title,
             price: product.price,
             quantity: quantity,
-            size: size,
+            // size: size,
             image: product.images[0]
         }
 
         addProductToCart(cartProduct);
         setPosted(false);
         setQuantity(1);
-        setSize(undefined);
+        // setSize(undefined);
     }
 
 
@@ -48,17 +51,17 @@ export const AddToCart = ({ product }: Props) => {
     return (
         <>
             {/* Mensaje de error, en caso de no seleccionar talla */}
-            {
+            {/* {
                 posted && !size && (
                     <span className="mt-2 text-pink-500 fade-in">Debe seleccionar una talla</span>
                 )
-            }
+            } */}
 
             {/* Selector de tallas */}
-            <SizeSelector
+            {/* <SizeSelector
                 selectedSize={size}
                 availableSizes={product.sizes}
-                onSizeChanged={setSize} />
+                onSizeChanged={setSize} /> */}
 
             {/* Selector de cantidad */}
             <QuantitySelector
@@ -76,7 +79,7 @@ export const AddToCart = ({ product }: Props) => {
                     <IoCartOutline />
                 </span>
 
-                <span className="text-sm font-medium transition-all group-hover:me-4"> Agregar al carrito </span>
+                <span className="text-sm font-medium transition-all group-hover:me-4"> Agregar al carrito</span>
             </button>
         </>
     )

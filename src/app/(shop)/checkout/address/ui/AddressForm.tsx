@@ -19,7 +19,7 @@ type FormInputs = {
     address2?: string;
     postalCode: string;
     city: string;
-    country: string;
+    country?: string;
     phone: string;
     rememberAddress?: boolean;
     // Funcion realizada solo para chile
@@ -28,18 +28,24 @@ type FormInputs = {
 }
 
 interface Props {
-    countries: Country[];
+    // countries: Country[];
     userStoredAddress?: Partial<Address>;
 }
 
 
-export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
+export const AddressForm = ({ /*countries*/ userStoredAddress = {} }: Props) => {
 
     const router = useRouter ()
 
     const { handleSubmit, register, formState: { isValid }, reset } = useForm<FormInputs>({
-        defaultValues: {
-            //Todo: leer de la base de datos
+        // defaultValues: {
+        //     //Todo: leer de la base de datos
+        //     ...(userStoredAddress as any),
+        //     rememberAddress: false,
+        // }
+        mode: "onChange",
+        defaultValues : {
+
             ...(userStoredAddress as any),
             rememberAddress: false,
         }
@@ -59,20 +65,35 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
         }
     }, [address, reset])
 
-    const onSubmit = async (data: FormInputs) => {
-        console.log({ data })
+    // const onSubmit = async (data: FormInputs) => {
+    //     console.log({ data })
         
-        const {rememberAddress, ...restAddress} = data;
-        setAddress(restAddress);
+    //     const {rememberAddress, ...restAddress} = data;
+    //     setAddress(restAddress);
 
-        if( rememberAddress ){
-            await setUserAddress( restAddress, session!.user.id )
-        }else{
-            await deleteUserAddress( session!.user.id )
+    //     if( rememberAddress ){
+    //         await setUserAddress( restAddress, session!.user.id )
+    //     }else{
+    //         await deleteUserAddress( session!.user.id )
+    //     }
+
+    //     router.push('/checkout');
+    // }
+    
+    const onSubmit = async (data: FormInputs) => {
+        const { rememberAddress, ...restAddress } = data;
+        const addressWithCountry = { ...restAddress, country: "CL" };
+        //{ name: "Chile", id: "CL" },
+        setAddress(addressWithCountry);
+
+        if (rememberAddress) {
+            await setUserAddress(addressWithCountry, session!.user.id);
+        } else {
+            await deleteUserAddress(session!.user.id);
         }
 
         router.push('/checkout');
-    }
+    };
 
     // Regiones y demas
     const [selectedRegion, setSelectedRegion] = useState('');
@@ -133,33 +154,38 @@ export const AddressForm = ({ countries, userStoredAddress = {} }: Props) => {
                 <input
                     type="text"
                     className="p-2 border rounded-md bg-gray-200"
-                    {...register('postalCode', { required: true })}
+                    {...register('postalCode')}
                 />
             </div>
 
-            <div className="flex flex-col mb-2">
+            {/* <div className="flex flex-col mb-2 hidden">
                 <span>Ciudad</span>
                 <input
                     type="text"
                     className="p-2 border rounded-md bg-gray-200"
                     {...register('city', { required: true })}
                 />
-            </div>
+            </div> */}
 
-            <div className="flex flex-col mb-2">
+            {/* <div className="flex flex-col mb-2 hidden" >
                 <span>País</span>
                 <select
                     className="p-2 border rounded-md bg-gray-200"
+                    defaultValue="CL"
                     {...register('country', { required: true })}
                 >
                     <option value="">[ Seleccione ]</option>
                     {
                         countries.map(c => (
+                            //  { name: "Chile", id: "CL" },
+                            
+                            // <option key={c.id} value='CL'>Chile</option>
                             <option key={c.id} value={c.id}>{c.name}</option>
                         ))
                     }
                 </select>
-            </div>
+            </div> */}
+            
 
 
             <div className="flex flex-col mb-2">

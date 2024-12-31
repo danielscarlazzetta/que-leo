@@ -1,7 +1,8 @@
 'use server'
 
 import prisma from '@/lib/prisma';
-import { Gender, Product, Size } from '@prisma/client';
+import { Gender, Product } from '@prisma/client';
+// import { Gender, Product, Size } from '@prisma/client';
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { v2 as cloudinary } from 'cloudinary';
@@ -21,7 +22,7 @@ const productSchema = z.object({
         .min(0)
         .transform(val => Number(val.toFixed(0))),
     categoryId: z.string().uuid(),
-    sizes: z.coerce.string().transform(val => val.split(',')),
+    // sizes: z.coerce.string().transform(val => val.split(',')),
     tags: z.string(),
     gender: z.nativeEnum(Gender),
 
@@ -56,9 +57,10 @@ export const createUpdateProduct = async (formData: FormData) => {
                     where: { id },
                     data: {
                         ...rest,
-                        sizes: {
-                            set: rest.sizes as Size[],
-                        },
+                        // sizes: {
+                        //     set: rest.sizes as Size[],
+                        // }
+                        
                         tags: {
                             set: tagsArray
                         },
@@ -71,9 +73,10 @@ export const createUpdateProduct = async (formData: FormData) => {
                 product = await prisma.product.create({
                     data: {
                         ...rest,
-                        sizes: {
-                            set: rest.sizes as Size[],
-                        },
+                        // sizes: {
+                        //     set: rest.sizes as Size[],
+                        // }
+                        
                         tags: {
                             set: tagsArray
                         },

@@ -1,17 +1,18 @@
 'use server'
 
 import { auth } from "@/auth.config";
-import type { Address, Size } from "@/interface";
+import type { Address } from "@/interface";
+// import type { Address, Size } from "@/interface";
 import prisma from "@/lib/prisma";
 
 
 interface ProductToOrder {
     productId: string;
     quantity: number;
-    size: Size;
+    // size: Size;
 }
 
-export const placeOrder = async (productIds: ProductToOrder[], address: Address) => {
+export const placeOrder = async (productIds: ProductToOrder[], address: Address, userId: string ) => {
 
     const session = await auth();
     const userID = session?.user.id;
@@ -112,19 +113,19 @@ export const placeOrder = async (productIds: ProductToOrder[], address: Address)
                     tax: tax,
                     total: total,
 
-                    OrderItem: {
-                        createMany: {
-                            data:
-                                productIds.map((p) => ({
-                                    quantity: p.quantity,
-                                    size: p.size,
-                                    productId: p.productId,
-                                    price:
-                                        products.find((product) => product.id === p.productId)
-                                            ?.price ?? 0,
-                                })),
-                        },
-                    },
+                    // OrderItem: {
+                    //     createMany: {
+                    //         data:
+                    //             productIds.map((p) => ({
+                    //                 quantity: p.quantity,
+                    //                 // size: p.size,
+                    //                 productId: p.productId,
+                    //                 price:
+                    //                     products.find((product) => product.id === p.productId)
+                    //                         ?.price ?? 0,
+                    //             })),
+                    //     },
+                    // },
                 },
             });
 

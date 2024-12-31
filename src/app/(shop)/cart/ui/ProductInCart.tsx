@@ -2,7 +2,6 @@
 
 import { ProductImage, QuantitySelector } from "@/components"
 import { useCartStore } from "@/store"
-import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { IoTrashOutline } from "react-icons/io5"
@@ -29,7 +28,8 @@ export const ProductInCart = () => {
         <>
             {
                 productInCart.map(p => (
-                    <div key={`${p.slug}-${p.size}`} className="flex mt-5">
+                    <div key={`${p.slug}`} className="flex mt-5">
+                        {/* key={`${p.slug}-${p.size}`} */}
                         <ProductImage
                             src={p.image}
                             width={150}
@@ -40,9 +40,10 @@ export const ProductInCart = () => {
                         {/* </Image> */}
                         <div>
                             <Link className="cursor-pointer" href={`/product/${p.slug}`}>
-                                <p>{p.size} - {p.title}</p>
+                                <p>{p.title}</p>
+                                {/* <p>{p.size} - {p.title}</p> */}
                             </Link>
-                            <p>$ {p.price}</p>
+                            <p className="font-bold">$ {p.price}</p>
                             <QuantitySelector
                                 quantity={ p.quantity }
                                 onQuantityChanged={ quantity => updateProductQuantity(p, quantity)} />
