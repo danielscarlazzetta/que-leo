@@ -163,7 +163,7 @@ export const AddressForm = ({ /*countries*/ userStoredAddress = {} }: Props) => 
                 <input
                     type="text"
                     className="p-2 border rounded-md bg-gray-200"
-                    {...register('city', { required: true })}
+                    {...register('city')}
                 />
             </div> */}
 
