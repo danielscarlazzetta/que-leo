@@ -61,10 +61,10 @@ export const Footer = () => {
                 <div>
                     <h2 className="text-lg font-semibold mb-4">Qué Leo</h2>
                     <ul className="space-y-2">
-                        <li><a href="#" className="hover:underline">Quiénes somos</a></li>
-                        <li><a href="#" className="hover:underline">Misión</a></li>
-                        <li><a href="#" className="hover:underline">Visión</a></li>
-                        <li><a href="#" className="hover:underline">Qué Leo Curicó</a></li>
+                        <li><a href="footerinfo/quienessomos" className="hover:underline">Quiénes somos</a></li>
+                        <li><a href="footerinfo/mision" className="hover:underline">Misión</a></li>
+                        <li><a href="footerinfo/vision" className="hover:underline">Visión</a></li>
+                        <li><a href="footerinfo/queleo" className="hover:underline">Qué Leo Curicó</a></li>
                     </ul>
                 </div>
 
@@ -72,13 +72,14 @@ export const Footer = () => {
                 <div>
                     <h2 className="text-lg font-semibold mb-4">Atención al cliente</h2>
                     <ul className="space-y-2">
-                        <li><a href="#" className="hover:underline">Devoluciones</a></li>
-                        <li><a href="#" className="hover:underline">Formas de envío</a></li>
-                        <li><a href="#" className="hover:underline">Preguntas frecuentes</a></li>
-                        <li><a href="#" className="hover:underline">Contáctanos</a></li>
+                        <li><a href="footerinfo/devoluciones" className="hover:underline">Devoluciones</a></li>
+                        <li><a href="footerinfo/formasEnvio" className="hover:underline">Formas de envío</a></li>
+                        <li><a href="footerinfo/preguntasFrecuentes" className="hover:underline">Preguntas frecuentes</a></li>
+                        <li><a href="footerinfo/contacto" className="hover:underline">Contáctanos</a></li>
                     </ul>
                 </div>
                 {/* Mapa */}
+
                 <div className="mr-8">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509904!2d-122.08424968509375!3d37.42199987982561!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDI1JzEwLjIiTiAxMjLCsDA1JzAyLjAiVw!5e0!3m2!1sen!2sus!4v1634616951918!5m2!1sen!2sus"
