@@ -61,10 +61,10 @@ export const Footer = () => {
                 <div>
                     <h2 className="text-lg font-semibold mb-4">Qué Leo</h2>
                     <ul className="space-y-2">
-                        <li><a href="footerinfo/quienessomos" className="hover:underline">Quiénes somos</a></li>
-                        <li><a href="footerinfo/mision" className="hover:underline">Misión</a></li>
-                        <li><a href="footerinfo/vision" className="hover:underline">Visión</a></li>
-                        <li><a href="footerinfo/queleo" className="hover:underline">Qué Leo Curicó</a></li>
+                        <li><a href="/quienessomos" className="hover:underline">Quiénes somos</a></li>
+                        <li><a href="/mision" className="hover:underline">Misión</a></li>
+                        <li><a href="/vision" className="hover:underline">Visión</a></li>
+                        <li><a href="/queleo" className="hover:underline">Qué Leo Curicó</a></li>
                     </ul>
                 </div>
 

@@ -1,8 +1,8 @@
-interface Subcategory {
+export interface Subcategory {
     name: string;
 }
 
-interface Category {
+export interface Category {
     name: string;
     subcategories?: Subcategory[];
 }
