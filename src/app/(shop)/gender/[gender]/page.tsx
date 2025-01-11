@@ -48,7 +48,7 @@ export default async function GenderByPage({ params, searchParams }: Props) {
         'women': 'muejres',
         'kid': 'ninos',
         'unisex': 'Articvulos para Todos'
-    }
+    } 
 
     // if ( id === 'kids'){
     //     notFound();

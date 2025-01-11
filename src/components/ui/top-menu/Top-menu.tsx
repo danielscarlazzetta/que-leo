@@ -47,15 +47,6 @@ export const TopMenu = () => {
     <nav className="flex px-5 justify-between items-center w-full">
       {/*Logo*/}
 
-      {/* <div>
-        <Link href="/">
-          <span className={`${title_font.className} antialiased font-bold`}>
-            Que leo
-          </span>{" "}
-          <span className="text-pink-500"> Shop</span>{" "}
-        </Link>
-      </div> */}
-
       <div>
         <Link href="/">
           <Image
@@ -119,15 +110,8 @@ export const TopMenu = () => {
                 )}
               </li>
             ))}
-
-
-
-
           </ul>
         </div>
-
-
-
 
         <Link
           className="m-2 p-2 rounded-md transition-all hover:bg-gray-100"
