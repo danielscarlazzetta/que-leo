@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import categories, { Category, Subcategory } from '@/app/(shop)/product/category'
+import { GoTriangleRight } from "react-icons/go";
 // import categories from '@/app/(shop)/product/category';
 
 
@@ -90,36 +91,20 @@ export const TopMenu = () => {
             className="py-2 text-sm text-pink-700 dark:text-pink-200"
             aria-labelledby="dropdownDefaultButton"
           >
-            {/* <li>
-              <a
-                href="/"
-                className="block px-4 py-2 hover:bg-pink-100 dark:hover:bg-pink-600 dark:hover:text-white"
-              >
-                Dashboard
-              </a>
-            </li> */}
-
-            {/* {categories?.map((cat: any) => (
-              <li key={cat.name}>
-                <a
-                  href="/"
-                  className="block px-4 py-2 hover:bg-pink-100 dark:hover:bg-pink-600 dark:hover:text-white"
-                >
-                  {cat.name}
-                </a>
-              </li>
-            ))} */}
-
+            
             {categories.map((cat: Category) => (
               <li key={cat.name} className="relative group">
                 <a
                   href="/"
-                  className="block px-4 py-2 hover:bg-pink-100 dark:hover:bg-pink-600 dark:hover:text-white"
+                  className="fade-in block px-4 py-2 hover:bg-pink-100 dark:hover:bg-pink-600 dark:hover:text-white"
                 >
                   {cat.name}
+                  {cat.subcategories && (
+                    <GoTriangleRight className="absolute right-0 top-1/2 transform -translate-y-1/2 text-white size-5" />
+                  )}
                 </a>
                 {cat.subcategories && (
-                  <ul className="absolute left-full top-0 mt-0 hidden group-hover:block bg-white rounded-e-lg shadow-md ">
+                  <ul className="fade-in absolute left-full top-0 mt-0 hidden group-hover:block bg-white rounded-e-lg shadow-md ">
                     {cat.subcategories.map((sub: Subcategory) => (
                       <li key={sub.name} className="text-gray-700">
                         <a
