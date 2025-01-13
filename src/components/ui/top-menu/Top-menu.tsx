@@ -8,6 +8,7 @@ import Image from "next/image";
 
 import categories, { Category, Subcategory } from '@/app/(shop)/product/category'
 import { GoTriangleRight } from "react-icons/go";
+import { title_font } from "@/config/fonts";
 // import categories from '@/app/(shop)/product/category';
 
 
@@ -44,7 +45,8 @@ export const TopMenu = () => {
 
 
   return (
-    <nav className="flex px-5 justify-between items-center w-full">
+    
+    <nav className={`${title_font.className} flex px-5 justify-between items-center w-full`}>
       {/*Logo*/}
 
       <div>
