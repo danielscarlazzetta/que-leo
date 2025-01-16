@@ -46,7 +46,7 @@ export const TopMenu = () => {
 
   return (
     
-    <nav className={`${title_font.className} flex px-5 justify-between items-center w-full`}>
+    <nav className={`${title_font.className}  flex px-5 justify-between items-center w-full`}>
       {/*Logo*/}
 
       <div>

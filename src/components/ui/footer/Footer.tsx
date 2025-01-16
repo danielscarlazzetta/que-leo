@@ -1,7 +1,6 @@
 import { title_font } from "@/config/fonts"
 import Image from "next/image";
-import Link from "next/link"
-import { IoLogoFacebook, IoLogoInstagram, IoLogoTwitter, IoLogoYoutube } from "react-icons/io5";
+import { IoLogoFacebook, IoLogoInstagram, IoLogoYoutube } from "react-icons/io5";
 
 
 export const Footer = () => {
@@ -23,7 +22,8 @@ export const Footer = () => {
     // )
 
     return (
-        <footer className=" text-white py-10" style={{ backgroundColor: "#D2108F" }}>
+        // className={`${title_font.className} text-white py-10`}
+        <footer className={`${title_font.className} text-white py-10`} style={{ backgroundColor: "#D2108F" }}>
             <div className="container grid grid-cols-1 md:grid-cols-4 gap-8 sm:mx-8"
                 style={{
                     marginLeft: 15,
@@ -47,9 +47,6 @@ export const Footer = () => {
                         </a>
                         <a href="#" aria-label="Instagram" className="text-xl">
                             <IoLogoFacebook className="w-6 h-6" />
-                        </a>
-                        <a href="#" aria-label="Twitter" className="text-xl">
-                            <IoLogoTwitter className="w-6 h-6" />
                         </a>
                         <a href="#" aria-label="YouTube" className="text-xl">
                             <IoLogoYoutube className="w-6 h-6" />
